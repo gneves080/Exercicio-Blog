@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "primeiro-post",
+    "titulo": "Meu Primeiro Post",
+    "autor": "Gabriel",
+    "data": "2026-07-06",
+    "descricao": "Este é o primeiro post do blog.",
+    "conteudo": "Conteúdo completo do primeiro post."
+  },
+  {
+    "slug": "segundo-post",
+    "titulo": "Segundo Post",
+    "autor": "Gabriel",
+    "data": "2026-07-05",
+    "descricao": "Resumo do segundo post.",
+    "conteudo": "Conteúdo completo do segundo post."
+  }
+]
