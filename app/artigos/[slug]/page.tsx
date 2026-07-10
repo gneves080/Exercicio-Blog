@@ -1,16 +1,20 @@
-import artigos from "@/data/artigos.json";
 import { notFound } from "next/navigation";
+import { getArtigoBySlug, getArtigos } from "@/lbi/api";
 
-// 🔹 SSG - gera páginas estáticas
+type Params = { slug: string };
+
+// 🔹 Gera páginas estáticas com base nos slugs vindos do backend
 export async function generateStaticParams() {
-  return artigos.map((artigo) => ({
+  const artigos = await getArtigos();
+
+  return (Array.isArray(artigos) ? artigos : []).map((artigo: any) => ({
     slug: artigo.slug,
   }));
 }
 
 // 🔹 SEO dinâmico
-export async function generateMetadata({ params }: any) {
-  const artigo = artigos.find((a) => a.slug === params.slug);
+export async function generateMetadata({ params }: { params: Params }) {
+  const artigo = await getArtigoBySlug(params.slug);
 
   if (!artigo) {
     return {
@@ -25,8 +29,8 @@ export async function generateMetadata({ params }: any) {
   };
 }
 
-export default async function ArtigoPage({ params }: any) {
-  const artigo = artigos.find((a) => a.slug === params.slug);
+export default async function ArtigoPage({ params }: { params: Params }) {
+  const artigo = await getArtigoBySlug(params.slug);
 
   if (!artigo) return notFound();
 
@@ -42,3 +46,4 @@ export default async function ArtigoPage({ params }: any) {
     </main>
   );
 }
+
