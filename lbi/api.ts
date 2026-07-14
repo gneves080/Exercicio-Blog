@@ -1,4 +1,4 @@
-const BASE_URL = "https://crudcrud.com/api/90462e2503d247f0bad3a018e99f0695/artigos";
+const BASE_URL = "https://crudcrud.com/api/551e073dedc54a9f8ea00bd8702941e5/artigos";
 
 // 🔹 Buscar todos os artigos
 export async function getArtigos() {
