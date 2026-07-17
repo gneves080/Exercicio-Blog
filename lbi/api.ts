@@ -1,21 +1,21 @@
-const BASE_URL = "https://crudcrud.com/api/551e073dedc54a9f8ea00bd8702941e5/artigos";
+import artigos from "@/data/artigos.json";
 
-// 🔹 Buscar todos os artigos
-export async function getArtigos() {
-  const res = await fetch(BASE_URL, {
-    cache: "no-store", // SSR (dados sempre atualizados)
-  });
+type Artigo = {
+  slug: string;
+  titulo: string;
+  autor: string;
+  data: string;
+  descricao: string;
+  conteudo: string;
+};
 
-  if (!res.ok) {
-    throw new Error("Erro ao buscar artigos");
-  }
-
-  return res.json();
+// 🔹 Buscar todos os artigos (fonte única: JSON local)
+export async function getArtigos(): Promise<Artigo[]> {
+  return artigos as Artigo[];
 }
 
-// 🔹 Buscar artigo por slug
-export async function getArtigoBySlug(slug: string) {
-  const artigos = await getArtigos();
-
-  return artigos.find((artigo: any) => artigo.slug === slug);
+// 🔹 Buscar artigo por slug (fonte única: JSON local)
+export async function getArtigoBySlug(slug: string): Promise<Artigo | undefined> {
+  return (artigos as Artigo[]).find((artigo) => artigo.slug === slug);
 }
+
